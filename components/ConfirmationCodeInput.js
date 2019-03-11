@@ -204,9 +204,13 @@ export default class ConfirmationCodeInput extends Component {
   _onInputCode(character, index) {
     const { codeLength, onFulfill, compareWithCode, ignoreCase } = this.props;
     let newCodeArr = _.clone(this.state.codeArr);
-    newCodeArr[index] = character;
-    
-    if (index == codeLength - 1) {
+    if(character.length === codeLength) {
+      newCodeArr = character
+    } else {
+      newCodeArr[index] = character;
+    }
+
+    if (index == codeLength - 1 || character.length === codeLength) {
       const code = newCodeArr.join('');
       
       if (compareWithCode) {
